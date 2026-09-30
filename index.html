@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой Профиль | Profile</title>
+    <title>Squizzy | Personal Card</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -14,35 +14,74 @@
             font-family: 'Inter', sans-serif;
         }
 
+        /* --- Тёмный глубокий фон с объемными пятнами --- */
         body {
-            background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 40%, #10b981 75%, #34d399 100%);
+            background-color: #0b0c10;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(255, 255, 255, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(255, 255, 255, 0.04) 0%, transparent 40%);
             background-attachment: fixed;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
-            color: #0f172a;
+            color: #ffffff;
         }
 
+        /* --- Тёмная стеклянная карточка --- */
         .card-container {
+            position: relative;
             width: 100%;
-            max-width: 420px;
-            background: rgba(255, 255, 255, 0.88);
+            max-width: 400px;
+            padding: 36px 28px;
+            border-radius: 28px;
+            overflow: hidden;
+            
+            /* Градиент заливки с матовым эффектом */
+            background: linear-gradient(
+                180deg, 
+                rgba(255, 255, 255, 0.12) 0%, 
+                rgba(20, 20, 25, 0.65) 35%, 
+                rgba(10, 10, 12, 0.85) 100%
+            );
+            
+            /* Размытие заднего фона */
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.7);
-            padding: 40px 28px;
-            border-radius: 28px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            
+            /* Тонкая рамка и объемная тень */
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.8),
+                inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            
             text-align: center;
         }
 
+        /* Глянцевый отблик в верхней части карточки */
+        .card-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 38%;
+            background: linear-gradient(
+                180deg, 
+                rgba(255, 255, 255, 0.14) 0%, 
+                rgba(255, 255, 255, 0) 100%
+            );
+            pointer-events: none;
+        }
+
+        /* --- Аватар --- */
         .avatar-wrapper {
             position: relative;
-            width: 110px;
-            height: 110px;
+            width: 105px;
+            height: 105px;
             margin: 0 auto 20px;
+            z-index: 1;
         }
 
         .avatar {
@@ -50,41 +89,50 @@
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid #ffffff;
-            box-shadow: 0 10px 25px rgba(6, 182, 212, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
         }
 
         .status-badge {
             position: absolute;
             bottom: 4px;
             right: 4px;
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             background: #10b981;
-            border: 3px solid #ffffff;
+            border: 3px solid #0f1218;
             border-radius: 50%;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
         }
 
+        /* --- Текст --- */
         .profile-name {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 800;
-            color: #0f172a;
+            color: #ffffff;
             letter-spacing: -0.5px;
             margin-bottom: 6px;
+            position: relative;
+            z-index: 1;
         }
 
         .profile-bio {
             font-size: 14px;
-            color: #475569;
-            font-weight: 500;
-            margin-bottom: 24px;
-            line-height: 1.4;
+            color: rgba(255, 255, 255, 0.65);
+            font-weight: 400;
+            margin-bottom: 28px;
+            line-height: 1.5;
+            position: relative;
+            z-index: 1;
         }
 
+        /* --- Кнопки-ссылки --- */
         .links-container {
             display: flex;
             flex-direction: column;
             gap: 14px;
+            position: relative;
+            z-index: 1;
         }
 
         .link-btn {
@@ -92,37 +140,55 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
-            padding: 16px 20px;
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(15, 23, 42, 0.08);
+            padding: 15px 20px;
+            
+            /* Стеклянные полупрозрачные кнопки */
+            background: linear-gradient(
+                180deg, 
+                rgba(255, 255, 255, 0.08) 0%, 
+                rgba(255, 255, 255, 0.02) 100%
+            );
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 16px;
-            color: #0f172a;
+            
+            color: #ffffff;
             text-decoration: none;
             font-size: 15px;
             font-weight: 600;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
         }
 
-        .link-btn i { font-size: 20px; }
+        .link-btn i { font-size: 18px; }
+
+        /* Ховер-эффекты для кнопок */
+        .link-btn:hover {
+            background: linear-gradient(
+                180deg, 
+                rgba(255, 255, 255, 0.2) 0%, 
+                rgba(255, 255, 255, 0.05) 100%
+            );
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
 
         .link-btn.telegram:hover {
-            background: #24A1DE;
-            color: #ffffff;
-            box-shadow: 0 8px 20px rgba(36, 161, 222, 0.35);
+            color: #38edf8;
+            border-color: rgba(56, 237, 248, 0.4);
         }
 
         .link-btn.github:hover {
-            background: #0f172a;
             color: #ffffff;
-            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.35);
+            border-color: rgba(255, 255, 255, 0.5);
         }
 
         .footer {
             margin-top: 28px;
             font-size: 12px;
-            color: #64748b;
+            color: rgba(255, 255, 255, 0.35);
             font-weight: 500;
+            position: relative;
+            z-index: 1;
         }
     </style>
 </head>
@@ -130,7 +196,7 @@
 
     <div class="card-container">
         <div class="avatar-wrapper">
-            <img class="avatar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4ThDWoOO9zuUUPwVSpsIRRu2RkcUIQ03QikNeN5DhwxP7yvwluIW4BPQ&s=10">
+            <img class="avatar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4ThDWoOO9zuUUPwVSpsIRRu2RkcUIQ03QikNeN5DhwxP7yvwluIW4BPQ&s=10" alt="Squizzy">
             <div class="status-badge"></div>
         </div>
 
@@ -147,7 +213,7 @@
                 <i class="fa-brands fa-github"></i>
                 <span>GitHub</span>
             </a>
-
+        </div>
 
         <div class="footer">
             © Squizzy • Personal Card
